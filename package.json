@@ -1,0 +1,36 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Type API for the Quartz static site generator",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "quartz",
+    "quartz-md",
+    "markdown",
+    "ssg",
+    "typescript"
+  ],
+  "author": {
+    "name": "quartz-md"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "quartz": "git://github.com/jackyzha0/quartz#v4",
+    "tslint": "^6.1.3",
+    "typescript": "^5.4.4"
+  },
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts",
+  "devDependencies": {
+    "@types/node": "^20.12.6"
+  }
+}
