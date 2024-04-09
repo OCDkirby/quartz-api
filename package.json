@@ -2,7 +2,6 @@
   "name": "api",
   "version": "1.0.0",
   "description": "Type API for the Quartz static site generator",
-  "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
@@ -26,10 +25,8 @@
     "typescript": "^5.4.4"
   },
   "files": [
-    "./bin/*",
-    "./lib/*"
+    "./*"
   ],
-  "typings": "./lib/index.d.ts",
   "devDependencies": {
     "@types/node": "^20.12.6"
   }
