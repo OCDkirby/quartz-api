@@ -7,7 +7,6 @@
     "build": "npx tsc --declaration",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "prepublish": "npm run build",
-    "postinstall": "pwd && node apiDependency.js"
   },
   "main": "build/index.js",
   "type": "module",
