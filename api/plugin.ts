@@ -1,1 +1,1 @@
-export { QuartzTransformerPlugin, QuartzFilterPlugin, QuartzEmitterPlugin } from "quartz/quartz/plugins/types"
+export { QuartzTransformerPlugin, QuartzFilterPlugin, QuartzEmitterPlugin } from "@jackyzha0/quartz/quartz/plugins/types"

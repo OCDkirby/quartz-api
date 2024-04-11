@@ -1,1 +1,1 @@
-export { QuartzComponent, QuartzComponentProps } from "quartz/quartz/components/types"
+export { QuartzComponent, QuartzComponentProps } from "@jackyzha0/quartz/quartz/components/types"
