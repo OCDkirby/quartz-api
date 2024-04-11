@@ -41,3 +41,6 @@ node_modules/
 
 # Packages intended as dependencies shouldn't track lockfiles
 package-lock.json
+
+# Testing file
+.quartz_api_resolved

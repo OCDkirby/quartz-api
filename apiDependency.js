@@ -1,5 +1,5 @@
 import { spawnSync } from 'child_process'
-import { existsSync } from 'fs'
+import { existsSync, writeFile } from 'fs'
 import { satisfies } from 'semver'
 
 import { createRequire } from "module";
@@ -10,6 +10,10 @@ pkgPath = pkgPath.split('node_modules')[0] + 'package.json' // take only the par
 import pkg from "./package.json" with { type: "json" } // require the package.json in that folder
 
 function fallbackToGit(searchPath) {
+  // If we've already resolved, don't do it again
+  if (existsSync("./.quartz_api_resolved")) {
+    return true
+  }
   const git_dependency = pkg["quartzPeerDependencies"]["quartz"].git
   const semver_dependency = pkg["quartzPeerDependencies"]["quartz"].semver
   console.log(semver_dependency)
@@ -42,8 +46,9 @@ function fallbackToGit(searchPath) {
 
 const installed = fallbackToGit("../../../") // true if run from quartz/node_modules/@quartz-md/api
 if (installed) {
-  console.log("Found quartz in dependency tree, depending on semver")
+  console.log("Found quartz in dependency tree")
 }
 else {
   console.log("Developing with quartz-api, using quartz from Git")
 }
+writeFile("./.quartz_api_resolved", "", (e) => {if(e) console.log(e)})
