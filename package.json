@@ -32,7 +32,7 @@
     "typescript": "^5.4.4"
   },
   "peerDependencies": {
-    "quartz": "git://github.com/jackyzha0/quartz#semver:^v4"
+    "quartz": "git://github.com/jackyzha0/quartz#semver:^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.6"
