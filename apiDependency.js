@@ -16,8 +16,6 @@ function fallbackToGit(searchPath) {
   }
   const git_dependency = pkg["quartzPeerDependencies"]["quartz"].git
   const semver_dependency = pkg["quartzPeerDependencies"]["quartz"].semver
-  console.log(semver_dependency)
-  console.log(git_dependency)
 
   let quartzProjectPackage = searchPath + "package.json"
   if (existsSync(quartzProjectPackage)) {
@@ -40,7 +38,7 @@ function fallbackToGit(searchPath) {
   }
 
   // Otherwise, get a copy from git for development purposes
-  spawnSync("npm", ["install", "--no-save", git_dependency])
+  spawnSync("npm", ["install", git_dependency])
   return false
 }
 
