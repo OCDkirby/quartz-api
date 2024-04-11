@@ -1,5 +1,6 @@
 import { spawnSync } from 'child_process'
 import { existsSync } from 'fs'
+import { satisfies } from 'semver'
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -16,22 +17,30 @@ function fallbackToGit(searchPath) {
 
   let quartzProjectPackage = searchPath + "package.json"
   if (existsSync(quartzProjectPackage)) {
-    let quartzProjectPackage = require(quartzProjectPackage)
+    let quartzProjectInfo = require(quartzProjectPackage)
 
-    // If we're being resolved as a (dependency of a)+ quartz project,
-    //   use that project's package name
-    if (quartzProjectPackage["name"] === "@jackyzha0/quartz") {
-      child_process.spawnSync("npm", ["install", "--save-peer", "quartz@" + semver_dependency])
+    // If the search path is a Quartz install,
+    //   check that it satisfies the semver required by this version of the API.
+    // If so, quartz's inherent self-dependency will be used when bundling
+    //   the plugin that depends on this API
+    if (quartzProjectInfo["name"] === "@jackyzha0/quartz") {
+      if (!satisfies(quartzProjectInfo["version"], semver_dependency)) {
+        throw new Error("quartz-api: ERR: quartz root is version " 
+          + quartzProjectInfo["version"]
+          + ", does not satisfy quartz-api requirement "
+          + semver_dependency)
+      }
+
       return true
     }
-
-    // Otherwise, get a copy from git for development purposes
-    child_process.spawnSync("npm", ["install", git_dependency])
-    return false
   }
+
+  // Otherwise, get a copy from git for development purposes
+  spawnSync("npm", ["install", git_dependency])
+  return false
 }
 
-const installed = fallbackToGit("../../../../") // true if run from quartz/node_modules/@quartz-md/api
+const installed = fallbackToGit("../../../") // true if run from quartz/node_modules/@quartz-md/api
 if (installed) {
   console.log("Found quartz in dependency tree, depending on semver")
 }
