@@ -36,7 +36,7 @@ function fallbackToGit(searchPath) {
   }
 
   // Otherwise, get a copy from git for development purposes
-  spawnSync("npm", ["install", "--save-peer", "--install-strategy=shallow", git_dependency])
+  spawnSync("npm", ["install", git_dependency])
   return false
 }
 
